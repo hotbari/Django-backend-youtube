@@ -1,0 +1,9 @@
+## requirements.txt
+
+# Django
+# 장고가 5.0.1 이상, 6.0.0 미만인 버전으로
+django>=5.0.1,<6.0.0
+
+# 장고 친구 DRF(Django Rest Framework)
+djangorestframework>=3.14.0,<4.0.0
+

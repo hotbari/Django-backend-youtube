@@ -1,0 +1,9 @@
+## app/app/.flake8
+# 코드스타일, 오류 잡아줌
+
+[flake8]
+exclude = 
+    migrations,
+    __pycache__,
+    manage.py,
+    settings.py

@@ -1,0 +1,17 @@
+
+# Github Actions CI,CD
+---
+name: Checks # Workflow이름
+
+on: [push] # git push 이벤트 활성화
+jobs:
+  test-lint:
+    name: Test and Lint
+    runs-on: ubuntu-20.04 # 작업환경 깃허브는 알파인을 지원하지 않아서 우분투라고 하는데 두 개 명령어가 똑같아서 충돌 안남
+    steps: # 작업단계
+      - name: Checkout # 깃 허브 레포에 있는 코드를 작업 환경으로 가져오는 역할
+        uses: actions/checkout@v2
+      - name: Test # 테스트 코드
+        run: docker-compose run --rm app sh -c "python manage.py test"
+      - name: Lint # pep8 파이썬 코드 스타일 가이드 준수 여부 검사
+        run: docker-compose run --rm app sh -c "flake8"
