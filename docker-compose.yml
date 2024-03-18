@@ -21,4 +21,26 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app
-    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+      # 디비 연결 먼저하고 서버 켜
+    command: >
+      sh -c "python manage.py wait_for_db &&
+            python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
+    environment: # .env는 커밋X 회사에서는 onepassword 프로그램을 사용해 .env 파일을 직접 만들어야됨
+      - DB_HOST=db
+      - DB_NAME=youtube
+      - DB_USER=hotbari
+      - DB_PASS=password123
+
+    depends_on: # 장고에서 db가 연결이 안되어있으면 장고가 터지기 때문에 db컨테이너 실행 후 앱 실행
+      - db
+
+  # 두번째 컨테이너 : Postgres
+  db:
+    image: postgres:16-alpine
+    volumes: # 데이터 저장 공간
+      - ./data/db:/var/lib/postgresql/data # 로컬 공간 data폴더의 db(호스트 공간)를 : 이하(컨테이너 폴더)로 마운트
+    environment: # 접근 권한에 대한 환경 변수
+      - POSTGRES_DB=youtube
+      - POSTGRES_USER=hotbari
+      - POSTGRES_PASSWORD=password123
