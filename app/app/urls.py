@@ -16,7 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    ## drf-spectacular
+    path('api/v1/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # swagger-ui : 개발자가 개발할 때 사용, 값 넣어 테스트 가능!
+    # url 넘 길어서 docs로 단순하게 바꿈
+    path('api/docs', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    # redoc : 기획자&비개발자가 결과물 확인시 사용, API 깔끔!
+    path('api/v1/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc')
 ]

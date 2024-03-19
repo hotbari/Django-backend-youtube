@@ -32,6 +32,7 @@ class User(AbstractBaseUser,PermissionsMixin,UserManager):
     email = models.CharField(max_length=255, unique=True) # 이거 왜 emailfield로 안함? 해도 된대여; 차이가 모임요
     nickname = models.CharField(max_length=255) 
     is_bussiness = models.BooleanField(default=False)
+    # email = models.EmailField()
     
     # PermissionsMixin으로 커스텀해서 권한 관리
     is_active = models.BooleanField(default=True) # 유저를 활성화 시키고

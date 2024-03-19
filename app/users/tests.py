@@ -1,6 +1,5 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
- # 유저 생성함수 import
+from django.contrib.auth import get_user_model # 유저 생성함수 import
 
 # Create your tests here.
 

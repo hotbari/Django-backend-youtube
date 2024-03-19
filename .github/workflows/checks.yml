@@ -6,6 +6,7 @@ name: Checks # Workflow이름
 on: [push] # git push 이벤트 활성화
 jobs:
   test-lint:
+
     name: Test and Lint
     runs-on: ubuntu-20.04 # 작업환경 깃허브는 알파인을 지원하지 않아서 우분투라고 하는데 두 개 명령어가 똑같아서 충돌 안남
     steps: # 작업단계
@@ -15,3 +16,10 @@ jobs:
         run: docker-compose run --rm app sh -c "python manage.py test"
       - name: Lint # pep8 파이썬 코드 스타일 가이드 준수 여부 검사
         run: docker-compose run --rm app sh -c "flake8"
+
+        #도커 연결 작업
+      - name: Login in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
