@@ -1,4 +1,5 @@
-
+### 강사님 GIT
+https://github.com/Seopftware/django-backend-youtube2
 
 ### 3. 장고프로젝트 세팅
 
@@ -42,8 +43,6 @@ django.db.migrations.exceptions.InconsistentMigrationHistory: Migration admin.00
 docker-compose run --rm app sh -c 'python manage.py migrate'
 주석 풀고 다시 migrate함
 
-
-
 ### 3월 19일
 ## DRF 세팅 (Django RestFrame work)
 설치할 것 : drf-spectacular (swaggerUI, redoc만들어서 소통 등을 사용하여 RESTAPI 테스트), DjangoRestframework
@@ -63,3 +62,34 @@ docker-compose build
 ## 비디오 모델 만든대 그 전에 커먼부터 만들쟤
 
 커먼 만들었어요~ common/models.py
+
+FileField는 장고에 파일을 저장한다.
+컴퓨터를 쓰다보면 느려지는 것처럼 장고에 파일이 저장되면 로드가 느려지기 때문에 urlField
+
+
+비디오 관련 RESTAPI
+1. 비디오 리스트
+get 전체 목록 조회
+post 새로운 비디오 생성
+put X
+delete X - 전체 데이터 삭제 금지
+
+기본틀 
+class VideoList():
+    def get():
+        pass
+
+    def post():
+        pass
+
+
+2. 비디오 디테일
+get 특정 비디오 조회
+put 특정 비디오 업데이트
+delete 특정 비디오 삭제
+
+TDD 방식으로 테스트코드 먼저 작성 -> 이게 통과하게끔 코드 작성
+
+클래스 모델을 정의 -> makemirations (장고에게 알려주기) -> migrate(장고가 DB를 찾아감)
+app을 실행해줘 --rm remove 컨테이너 지워줘 sh 쉘스트리트 실행해줘
+

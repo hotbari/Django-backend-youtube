@@ -42,6 +42,8 @@ DJANGO_SYSTEM_APPS = [
 CUSTOM_USER_APPS = [
     'core',
     'users.apps.UsersConfig',
+    'videos.apps.VideosConfig',
+    'common.apps.CommonConfig',
     'rest_framework',
     'drf_spectacular'
 ]
