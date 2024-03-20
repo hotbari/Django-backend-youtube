@@ -66,15 +66,41 @@ class VideoAPITestCase(APITestCase):
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         self.assertEqual(res.data['title'], 'test video post')
         
-    
+    ## api/v1/video/{pk} -> REST API
     # 특정 비디오 조회 
     def test_video_detail_get(self):
-        pass
+        url = reverse('video-detail', kwargs={'pk':self.video.pk}) # urls.py에 작성한 경로를 가져온다
+        
+        # 항상 서버를 요청하면 응답이 온다! res = ...
+        res = self.client.get(url)
+        
+        
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
     
     # 특정 비디오 업데이트
     def test_video_detail_put(self):
-        pass
+        url = reverse('video-detail', kwargs={'pk':self.video.pk})
+        data = {
+            'title' : 'test video update',
+            'link' : 'http://test.com',
+            'category' : 'test category',
+            'thumbnail' : 'http://test.com',
+            'video_file': SimpleUploadedFile('file.mp4',b'file_content', 'video/mp4'),
+            'user' : self.user.pk
+        }
+        res = self.client.put(url,data)
+        
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data['title'],'test video update')
     
     # 특정 비디오 삭제
     def test_video_detail_delete(self):
-        pass
+        url = reverse('video-detail', kwargs={'pk':self.video.pk})
+        
+        res = self.client.delete(url)
+        
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT) # 204
+        
+        # 진짜... 지워졌을까? 
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)

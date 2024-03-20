@@ -93,3 +93,42 @@ TDD 방식으로 테스트코드 먼저 작성 -> 이게 통과하게끔 코드 
 클래스 모델을 정의 -> makemirations (장고에게 알려주기) -> migrate(장고가 DB를 찾아감)
 app을 실행해줘 --rm remove 컨테이너 지워줘 sh 쉘스트리트 실행해줘
 
+
+>> 오류
+장고 어드민 오류에서 auth_user 테이블에서 오류 발생
+docker-compose run --rm app sh -c 'python manage.py dbshell'
+youtube=# 이렇게 뜨면 DROP TABLE django_admin_log;
+문젲가 됐던 0001 파일은 sqlmigrate 하겠다
+docker-compose run --rm app sh -c 'python manage.py sqlmigrate admin 0001 | ./manage.py dbshell'
+서버실행 docker-compose up
+
+
+비디오 테스트 코드 만들고 뷰 함수 만들러 ㄱㄱ
+
+비디오 비주얼라이즈에서 read_only=True 안했더니
+..F.F
+======================================================================
+FAIL: test_video_detail_put (videos.tests.VideoAPITestCase.test_video_detail_put)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/videos/tests.py", line 92, in test_video_detail_put
+    self.assertEqual(res.status_code, status.HTTP_200_OK)
+AssertionError: 400 != 200
+
+======================================================================
+FAIL: test_video_list_post (videos.tests.VideoAPITestCase.test_video_list_post)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/app/videos/tests.py", line 66, in test_video_list_post
+    self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+AssertionError: 400 != 201
+
+----------------------------------------------------------------------
+Ran 5 tests in 7.633s
+
+FAILED (failures=2)
+오류 떴었음...!
+
+
+모델을 만들면 ... 세팅에 앱추가해주고 메잉크마이그레이션.. 마이그레이트 ... 꼭 하세요... 왜 안하시는지 귀찮은가요? 
+하셔야합니다.. 그래야 장고가 알 수 있거든요

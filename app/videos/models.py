@@ -1,6 +1,7 @@
 from django.db import models
 from common.models import CommonModel
 from users.models import User
+
 # Create your models here.
 
 class Video(CommonModel):
@@ -14,4 +15,4 @@ class Video(CommonModel):
     
     # User:Video = 1:N Video가 FK를 갖는다
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+    comment = models

@@ -26,3 +26,35 @@ class VideoList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED) # 데이터를 만든거라 201
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+from rest_framework.exceptions import NotFound
+# 특정 비디오 조회
+class VideoDetail(APIView):
+    def get(self, request, pk): #api/v1/video/{pk(나는 video_id로함..)}
+        try :
+            video_obj = Video.objects.get(pk=pk)
+        except Video.DoesNotExist:
+            raise NotFound
+        
+        serializer = VideoSerializer(video_obj)
+        return Response(serializer.data)
+    
+    
+    def put(self, request, pk):
+        video_obj = Video.objects.get(pk=pk)
+        user_data = request.data
+            
+        serializer = VideoSerializer(video_obj, user_data)
+        
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        
+        return Response(serializer.data)
+    
+    
+    def delete(self, request, pk):
+        video_obj = Video.objects.get(pk=pk)
+        video_obj.delete()
+        
+        return Response(status=status.HTTP_204_NO_CONTENT)
