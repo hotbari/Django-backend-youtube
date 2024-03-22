@@ -13,3 +13,6 @@ psycopg2-binary>=2.9.9,<3.0.0
 # DRF-Spectacular
 drf_spectacular>=0.27.1,<0.28.0
 
+# Help Django Chatting Socket 
+# 업데이트 오래된 애들은 업데이트 시 많은 변화가 있을 수 있기때문에 락 걸어놓음
+channels>=4.0.0,<4.0.1

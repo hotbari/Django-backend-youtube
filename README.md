@@ -132,3 +132,39 @@ FAILED (failures=2)
 
 모델을 만들면 ... 세팅에 앱추가해주고 메잉크마이그레이션.. 마이그레이트 ... 꼭 하세요... 왜 안하시는지 귀찮은가요? 
 하셔야합니다.. 그래야 장고가 알 수 있거든요
+
+
+video api에서 comments를 보여주고싶은데 왜 안돼!
+일단 comments 폴더에 시리얼라이즈 추가
+순환 참조... 문제라는데 뭘까? 이거는 내가 걍 잘못한거고 시리얼라이즈로 해결하면 됨
+comment_set이랑 many=True !!
+
+도커 파일이나 도커 컴포즈에 명령어 추가했을 때만 빌드
+
+### 기본 과정
+모델 -> 세팅 -> 마이그레이션-> 테스트 -> 뷰 -> 시리얼라이즈
+어드민 페이지에서 관리하려면 어드민 등록
+
+# 구독 버튼 테스트
+    # api/v1/sub
+    def test_sub_list_post(self):
+        url = reverse()
+        data = {
+            
+        }
+        
+        self.client.post(url,data)
+
+구조는 유사
+
+save()는 업데이트 때만
+
+## *args **kwargs
+args(1,2)
+kwargs(a=1, b=2)
+
+대댓글
+parent =models.ForeignKey('self, dondelte_models>cASCADE, null=True, blank=True)
+
+API 따기
+개발자도구에서 네트워크 켜놓고 실행해서 로그 확인

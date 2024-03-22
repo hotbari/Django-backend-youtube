@@ -1,7 +1,9 @@
+# vdieos/views.py
+
 from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import Video
-from .serializers import VideoSerializer
+from .serializers import VideoListSerializer,VideoDetailSerializer
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -11,14 +13,14 @@ class VideoList(APIView):
         videos = Video.objects.all() # QuerySet[Video1, Video2, .....]
         # 시리얼라이저 (Object->Json), 직렬화&원하는 데이터만 내려주는 기능도 있다
         
-        serializer = VideoSerializer(videos, many=True) # 비디오가 여러개니까용
+        serializer = VideoListSerializer(videos, many=True) # 비디오가 여러개니까용
         return Response(serializer.data, status=status.HTTP_200_OK)
         
 
     def post(self, request):
         user_data = request.data
         # 역직렬화
-        serializer = VideoSerializer(data=user_data)
+        serializer = VideoListSerializer(data=user_data)
         
         # 두 개는 셋뚜
         if serializer.is_valid():
@@ -37,7 +39,7 @@ class VideoDetail(APIView):
         except Video.DoesNotExist:
             raise NotFound
         
-        serializer = VideoSerializer(video_obj)
+        serializer = VideoDetailSerializer(video_obj)
         return Response(serializer.data)
     
     
@@ -45,7 +47,7 @@ class VideoDetail(APIView):
         video_obj = Video.objects.get(pk=pk)
         user_data = request.data
             
-        serializer = VideoSerializer(video_obj, user_data)
+        serializer = VideoDetailSerializer(video_obj, user_data)
         
         serializer.is_valid(raise_exception=True)
         serializer.save()

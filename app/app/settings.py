@@ -45,11 +45,21 @@ CUSTOM_USER_APPS = [
     'videos.apps.VideosConfig',
     'common.apps.CommonConfig',
     'comments.apps.CommentsConfig',
+    'subscriptions.apps.SubscriptionsConfig',
+    'reactions.apps.ReactionsConfig',
     'rest_framework',
-    'drf_spectacular'
+    'drf_spectacular',
+    'channels',
+    'chat.apps.ChatConfig'
 ]
 
 INSTALLED_APPS = CUSTOM_USER_APPS + DJANGO_SYSTEM_APPS
+
+# Channels를 사용하기 위한 설정
+ASGI_APPLICATION = 'app.routes.application' # 소켓 같은 비동기 처리, 채팅 기능 만들 땐 이거 써요
+# 비동기지만 동기도 돼! 이게 FAST API
+
+WSGI_APPLICATION = 'app.wsgi.application' # HTTP base - REST API 동기처리
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,7 +89,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'app.wsgi.application'
+
 
 
 # Database
