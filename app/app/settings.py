@@ -40,6 +40,7 @@ DJANGO_SYSTEM_APPS = [
 ]
 
 CUSTOM_USER_APPS = [
+    'daphne',
     'core',
     'users.apps.UsersConfig',
     'videos.apps.VideosConfig',
@@ -56,10 +57,11 @@ CUSTOM_USER_APPS = [
 INSTALLED_APPS = CUSTOM_USER_APPS + DJANGO_SYSTEM_APPS
 
 # Channels를 사용하기 위한 설정
-ASGI_APPLICATION = 'app.routes.application' # 소켓 같은 비동기 처리, 채팅 기능 만들 땐 이거 써요
+ASGI_APPLICATION = 'app.route.application' # 소켓 같은 비동기 처리, 채팅 기능 만들 땐 이거 써요
 # 비동기지만 동기도 돼! 이게 FAST API
 
 WSGI_APPLICATION = 'app.wsgi.application' # HTTP base - REST API 동기처리
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,7 +70,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -141,7 +143,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

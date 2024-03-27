@@ -13,7 +13,7 @@ from psycopg2 import OperationalError as Psycopg2OpError
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        self.stdout.write("Wating for DB Connections...") # command로 로그 노출
+        self.stdout.write("Waiting for DB Connections...") # command로 로그 노출
 
         is_db_connected = None
 

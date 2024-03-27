@@ -168,3 +168,13 @@ parent =models.ForeignKey('self, dondelte_models>cASCADE, null=True, blank=True)
 
 API 따기
 개발자도구에서 네트워크 켜놓고 실행해서 로그 확인
+
+
+### 3월 25일
+http - websocket 차이 많음
+헤더의 크기 차이
+socket : 양방향 통신 가능, low overhead, frame(웹소켓에서 데이터를 나누는 단위)
+3 ways 핸드쉐이크
+
+
+
